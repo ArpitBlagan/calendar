@@ -27,6 +27,7 @@ const Navbar = () => {
         ) : (
           <div className="flex gap-3 items-center ">
             <Link to="/calendar">View events</Link>
+            <Link to="/history">History</Link>
             <Menubar>
               <MenubarMenu>
                 <MenubarTrigger>Profile</MenubarTrigger>
