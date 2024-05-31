@@ -16,6 +16,7 @@ import {
 import Form from "@/components/Form";
 import { Button } from "@/components/ui/button";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 const Calendarr = () => {
   const [loading, setL] = useState(true);
   const [change, setChange] = useState(false);
@@ -98,6 +99,7 @@ const Calendarr = () => {
   );
 };
 function renderEventContent(eventInfo: any) {
+  const navigate = useNavigate();
   return (
     <Dialog>
       <DialogTrigger>
@@ -127,6 +129,7 @@ function renderEventContent(eventInfo: any) {
                     );
                     toast.success("event deleted successfullly.");
                     console.log(res.data);
+                    navigate("/");
                   } catch (err) {
                     toast.error("something went wrong while deleting an event");
                     console.log(err);
@@ -136,7 +139,6 @@ function renderEventContent(eventInfo: any) {
               >
                 Delete
               </Button>
-              <Button>Update</Button>
             </div>
           </DialogDescription>
         </DialogHeader>

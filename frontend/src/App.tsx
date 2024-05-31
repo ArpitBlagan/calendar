@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import Calendarr from "./page/Calendarr";
 import Login from "./page/Login";
 import { Toaster } from "react-hot-toast";
+import History from "./page/History";
 function App() {
   return (
     <Router>
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Intro />} />
         <Route path="/calendar" element={<Calendarr />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/history" element={<History />} />
       </Routes>
       <Footer />
     </Router>

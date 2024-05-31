@@ -10,6 +10,7 @@ const userInfo = new mongoose.Schema({
 });
 const history = new mongoose.Schema({
   event: String,
+  event_id: String,
   executedAt: {
     type: Date,
     default: Date.now(),

@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import session from "express-session";
 import mongoose from "mongoose";
 import { google } from "googleapis";
+import { History } from "./schema/user";
 dotenv.config();
 import cookieParser from "cookie-parser";
 import { userInfoModel } from "./schema/user";
@@ -121,6 +122,10 @@ app.delete("/events/:eventId", async (req, res) => {
       calendarId: "primary",
       eventId: eventId,
     });
+    await History.create({
+      event: "deletion",
+      event_id: id,
+    });
     res.send(`Event with ID ${eventId} deleted.`);
   } catch (error) {
     console.error("Error deleting event:", error);
@@ -160,6 +165,10 @@ app.post("/event", async (req, res) => {
       calendarId: "primary",
       requestBody: event,
     });
+    await History.create({
+      event: "Event Insertion",
+      event_id: d.data.id,
+    });
     console.log(d);
     res.status(202).json({ message: "event created successfully" });
   } catch (err) {
@@ -196,6 +205,26 @@ app.get("/user/info", async (req, res) => {
     });
   } else {
     res.redirect("http://localhost:5173/login");
+  }
+});
+app.get("/history", async (req, res) => {
+  try {
+    const data = await History.find();
+    res.status(200).json(data);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "something went wrong" });
+  }
+});
+app.delete("/history/:id", async (req, res) => {
+  const id: any = req.params.id;
+  const ff = id.substr(1);
+  try {
+    const dd = await History.findByIdAndDelete({ _id: ff });
+    console.log(dd);
+    res.status(202).json({ message: "deleted successfully" });
+  } catch (err) {
+    console.log(err);
   }
 });
 app.listen(process.env.PORT, () => {
