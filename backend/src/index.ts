@@ -13,17 +13,11 @@ app.use(express.json());
 mongoose.connect(process.env.URL as string).then((con) => {
   console.log("connnected");
 });
-app.use(
-  session({
-    secret: "your_secret",
-    resave: false,
-    saveUninitialized: true,
-  })
-);
 app.use(cookieParser());
 app.use(
   cors({
     origin: [
+      "*",
       "http://localhost:5173",
       "https://calendar-ten-psi.vercel.app",
       "https://calendar-ten-psi.vercel.app",

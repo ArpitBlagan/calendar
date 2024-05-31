@@ -23,6 +23,7 @@ const Contextt = ({ children }: any) => {
   useEffect(() => {
     const getInfo = async () => {
       try {
+        console.log("fucking");
         const res = await axios.get(
           "https://calendar-9ofe.onrender.com/user/info",
           {
