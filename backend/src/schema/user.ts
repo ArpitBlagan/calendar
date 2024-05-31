@@ -8,4 +8,12 @@ const userInfo = new mongoose.Schema({
     default: Date.now(),
   },
 });
+const history = new mongoose.Schema({
+  event: String,
+  executedAt: {
+    type: Date,
+    default: Date.now(),
+  },
+});
+export const History = mongoose.model("History", history);
 export const userInfoModel = mongoose.model("userInforModel", userInfo);
