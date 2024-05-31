@@ -23,7 +23,11 @@ app.use(
 app.use(cookieParser());
 app.use(
   cors({
-    origin: ["http://localhost:5173", "https://calendar-ten-psi.vercel.app"],
+    origin: [
+      "http://localhost:5173",
+      "https://calendar-ten-psi.vercel.app",
+      "https://calendar-ten-psi.vercel.app",
+    ],
     credentials: true,
   })
 );
@@ -204,7 +208,7 @@ app.get("/user/info", async (req, res) => {
       });
     });
   } else {
-    res.redirect("http://localhost:5173/login");
+    res.redirect("https://calendar-ten-psi.vercel.app");
   }
 });
 app.get("/history", async (req, res) => {
