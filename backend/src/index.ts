@@ -80,7 +80,7 @@ app.get("/events", async (req: any, res: Response) => {
   const token = req.cookies.token;
   const user = await userInfoModel.findOne({ access_token: token });
   if (!user) {
-    res.redirect("https://calendar-ten-psi.vercel.app");
+    res.status(401).json({ message: "unauthorized" });
   }
   oauth2Client.setCredentials({ refresh_token: user?.refersh_token });
   // Refresh the access token.
@@ -105,7 +105,7 @@ app.delete("/events/:eventId", async (req, res) => {
   const token = req.cookies.token;
   const user = await userInfoModel.findOne({ access_token: token });
   if (!user) {
-    res.redirect("https://calendar-ten-psi.vercel.app");
+    res.status(401).json({ message: "unauthorized" });
   }
   oauth2Client.setCredentials({ refresh_token: user?.refersh_token });
   // Refresh the access token.
@@ -134,7 +134,7 @@ app.post("/event", async (req, res) => {
   const token = req.cookies.token;
   const user = await userInfoModel.findOne({ access_token: token });
   if (!user) {
-    res.redirect("https://calendar-ten-psi.vercel.app");
+    res.status(401).json({ message: "unauthorized" });
   }
   oauth2Client.setCredentials({ refresh_token: user?.refersh_token });
   // Refresh the access token.
@@ -202,7 +202,9 @@ app.get("/user/info", async (req, res) => {
       });
     });
   } else {
-    res.redirect("https://calendar-ten-psi.vercel.app");
+    if (!user) {
+      res.status(401).json({ message: "unauthorized" });
+    }
   }
 });
 app.get("/history", async (req, res) => {
