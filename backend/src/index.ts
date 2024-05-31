@@ -30,7 +30,7 @@ app.use(
 const oauth2Client = new google.auth.OAuth2(
   process.env.CLIENT_ID,
   process.env.CLIENT_SECRET,
-  "http://localhost:8000/auth/google/callback"
+  "https://calendar-9ofe.onrender.com/auth/google/callback"
 );
 const calendar = google.calendar({ version: "v3", auth: process.env.API_KEY });
 // generate a url that asks permissions for Blogger and Google Calendar scopes
@@ -76,13 +76,13 @@ app.get("/auth/google/callback", async (req, res) => {
     secure: true,
   });
   //req.session.tokens = tokens;
-  res.redirect("http://localhost:5173");
+  res.redirect("https://calendar-ten-psi.vercel.app");
 });
 app.get("/events", async (req: any, res: Response) => {
   const token = req.cookies.token;
   const user = await userInfoModel.findOne({ access_token: token });
   if (!user) {
-    res.redirect("http://localhost:5173/login");
+    res.redirect("https://calendar-ten-psi.vercel.app");
   }
   oauth2Client.setCredentials({ refresh_token: user?.refersh_token });
   // Refresh the access token.
@@ -107,7 +107,7 @@ app.delete("/events/:eventId", async (req, res) => {
   const token = req.cookies.token;
   const user = await userInfoModel.findOne({ access_token: token });
   if (!user) {
-    res.redirect("http://localhost:5173/login");
+    res.redirect("https://calendar-ten-psi.vercel.app");
   }
   oauth2Client.setCredentials({ refresh_token: user?.refersh_token });
   // Refresh the access token.
@@ -136,7 +136,7 @@ app.post("/event", async (req, res) => {
   const token = req.cookies.token;
   const user = await userInfoModel.findOne({ access_token: token });
   if (!user) {
-    res.redirect("http://localhost:5173/login");
+    res.redirect("https://calendar-ten-psi.vercel.app");
   }
   oauth2Client.setCredentials({ refresh_token: user?.refersh_token });
   // Refresh the access token.
