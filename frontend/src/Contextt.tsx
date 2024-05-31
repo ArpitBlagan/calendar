@@ -23,9 +23,12 @@ const Contextt = ({ children }: any) => {
   useEffect(() => {
     const getInfo = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/user/info", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://calendar-9ofe.onrender.com/user/info",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(res.data);
         setI({
           name: res.data.name,
