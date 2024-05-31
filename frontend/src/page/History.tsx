@@ -18,9 +18,12 @@ const History = () => {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("http://localhost:8000/history", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://calendar-9ofe.onrender.com/history",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(res.data);
         toast.success("history's data fetched successfully");
         setD(res.data);
@@ -59,7 +62,7 @@ const History = () => {
                       e.preventDefault();
                       try {
                         const res = await axios.delete(
-                          `http://localhost:8000/history/:${ele._id}`
+                          `https://calendar-9ofe.onrender.com/history/:${ele._id}`
                         );
                         console.log(res.data);
                         setC(!change);

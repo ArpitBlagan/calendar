@@ -21,14 +21,16 @@ const Calendarr = () => {
   const [loading, setL] = useState(true);
   const [change, setChange] = useState(false);
   const [data, setD] = useState<any[]>([]);
-  const [events, setE] = useState([]);
   useEffect(() => {
     const getData = async () => {
       setL(true);
       try {
-        const res = await axios.get("http://localhost:8000/events", {
-          withCredentials: true,
-        });
+        const res = await axios.get(
+          "https://calendar-9ofe.onrender.com/events",
+          {
+            withCredentials: true,
+          }
+        );
         console.log(res.data);
         const fff: any[] = [];
         res.data.map((ele: any) => {
@@ -37,9 +39,6 @@ const Calendarr = () => {
             return;
           }
           console.log(ff);
-          const date = ff.split("T")[0];
-          const time = ff.split("T")[1];
-          console.log(time);
           fff.push({
             title: ele.description,
             id: ele.id as string,
@@ -49,7 +48,6 @@ const Calendarr = () => {
           return;
         });
         setD(fff);
-        setE(res.data);
         setL(false);
         toast.success("successfully fetched the events detail");
       } catch (err) {
@@ -122,7 +120,7 @@ function renderEventContent(eventInfo: any) {
                   e.preventDefault();
                   try {
                     const res = await axios.delete(
-                      `http://localhost:8000/events/:${eventInfo.event.id}`,
+                      `https://calendar-9ofe.onrender.com/events/:${eventInfo.event.id}`,
                       {
                         withCredentials: true,
                       }

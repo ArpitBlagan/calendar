@@ -59,9 +59,13 @@ const Form = ({ setChange, change }: any) => {
         dateTime: data.dateTime,
         endTime: data.endTime,
       };
-      const res = await axios.post("http://localhost:8000/event", body, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        "hhttps://calendar-9ofe.onrender.com/event",
+        body,
+        {
+          withCredentials: true,
+        }
+      );
       console.log(res.data);
       toast.success("event created successfully");
       setChange(!change);
