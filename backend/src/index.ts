@@ -39,9 +39,6 @@ const scopes = [
 ];
 
 app.get("/auth/google", (req, res) => {
-  if (oauth2Client.credentials.access_token) {
-    res.json({ message: "already logged In" });
-  }
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
@@ -59,6 +56,14 @@ app.get("/auth/google/callback", async (req, res) => {
         refersh_token: tokens.refresh_token,
       });
       console.log("created successfully");
+      oauth2Client.setCredentials(tokens);
+      res.cookie("token", tokens.access_token, {
+        sameSite: "none",
+        httpOnly: true,
+        secure: true,
+      });
+      //req.session.tokens = tokens;
+      res.redirect("https://calendar-ten-psi.vercel.app/");
     } catch (err) {
       console.log(err);
       return res
@@ -66,15 +71,6 @@ app.get("/auth/google/callback", async (req, res) => {
         .json({ message: "something went wrong while saving the tokens" });
     }
   }
-
-  oauth2Client.setCredentials(tokens);
-  res.cookie("token", tokens.access_token, {
-    sameSite: "none",
-    httpOnly: true,
-    secure: true,
-  });
-  //req.session.tokens = tokens;
-  res.redirect("https://calendar-ten-psi.vercel.app");
 });
 app.get("/events", async (req: any, res: Response) => {
   const token = req.cookies.token;
@@ -202,9 +198,7 @@ app.get("/user/info", async (req, res) => {
       });
     });
   } else {
-    if (!user) {
-      res.status(401).json({ message: "unauthorized" });
-    }
+    res.status(401).json({ message: "unauthorized" });
   }
 });
 app.get("/history", async (req, res) => {
@@ -227,7 +221,7 @@ app.delete("/history/:id", async (req, res) => {
     console.log(err);
   }
 });
-const port = process.env.PORT || 4000;
+const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`listening on port ${process.env.PORT}`);
 });
