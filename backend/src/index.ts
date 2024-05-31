@@ -20,7 +20,7 @@ app.use(
       "*",
       "http://localhost:5173",
       "https://calendar-ten-psi.vercel.app",
-      "https://calendar-ten-psi.vercel.app",
+      "https://calendar-git-master-arpitblagans-projects.vercel.app/",
     ],
     credentials: true,
   })
