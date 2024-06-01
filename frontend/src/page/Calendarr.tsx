@@ -23,7 +23,7 @@ const Calendarr = () => {
   useEffect(() => {
     const getData = async () => {
       setL(true);
-      toast("fetching events);
+      toast("fetching events");
       try {
         const res = await axios.get(
           "https://calendar-9ofe.onrender.com/events",
