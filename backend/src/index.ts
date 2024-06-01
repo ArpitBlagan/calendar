@@ -47,8 +47,9 @@ app.get("/auth/google", (req, res) => {
 });
 app.get("/auth/google/callback", async (req, res) => {
   const code = req.query.code;
-  //@ts-ignore
+  console.log("request to callback route");
   const { tokens } = await oauth2Client.getToken(code as any);
+  console.log("tokens", tokens);
   if (tokens.access_token && tokens.refresh_token) {
     try {
       const ff = await userInfoModel.create({
