@@ -97,7 +97,7 @@ const Calendarr = () => {
   );
 };
 function renderEventContent(eventInfo: any) {
-  const navigate = useNavigate();
+  
   return (
     <Dialog>
       <DialogTrigger>
@@ -127,7 +127,6 @@ function renderEventContent(eventInfo: any) {
                     );
                     toast.success("event deleted successfullly.");
                     console.log(res.data);
-                    navigate("/");
                   } catch (err) {
                     toast.error("something went wrong while deleting an event");
                     console.log(err);
