@@ -60,7 +60,7 @@ const Form = ({ setChange, change }: any) => {
         endTime: data.endTime,
       };
       const res = await axios.post(
-        "hhttps://calendar-9ofe.onrender.com/event",
+        "https://calendar-9ofe.onrender.com/event",
         body,
         {
           withCredentials: true,
