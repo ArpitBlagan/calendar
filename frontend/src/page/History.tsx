@@ -17,6 +17,7 @@ const History = () => {
   const [change, setC] = useState<boolean>(false);
   useEffect(() => {
     const getData = async () => {
+      toast("fetching history");
       try {
         const res = await axios.get(
           "https://calendar-9ofe.onrender.com/history",
@@ -60,6 +61,7 @@ const History = () => {
                     className="cursor-pointer"
                     onClick={async (e) => {
                       e.preventDefault();
+                      toast("Deleting history")
                       try {
                         const res = await axios.delete(
                           `https://calendar-9ofe.onrender.com/history/:${ele._id}`
