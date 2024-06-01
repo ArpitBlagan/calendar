@@ -23,6 +23,7 @@ const Calendarr = () => {
   useEffect(() => {
     const getData = async () => {
       setL(true);
+      toast("fetching events);
       try {
         const res = await axios.get(
           "https://calendar-9ofe.onrender.com/events",
@@ -117,6 +118,7 @@ function renderEventContent(eventInfo: any) {
               <Button
                 onClick={async (e) => {
                   e.preventDefault();
+                  toast("deleting event")
                   try {
                     const res = await axios.delete(
                       `https://calendar-9ofe.onrender.com/events/:${eventInfo.event.id}`,
