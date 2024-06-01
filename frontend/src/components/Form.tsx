@@ -51,7 +51,9 @@ const Form = ({ setChange, change }: any) => {
   const submit: SubmitHandler<eventType> = async (data) => {
     console.log("login", data);
     const ff = data.attendees.split(",");
+    toast("adding event");
     try {
+      
       const body = {
         summary: data.summary,
         description: data.description,
