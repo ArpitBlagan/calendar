@@ -42,6 +42,7 @@ app.get("/auth/google", (req, res) => {
   const url = oauth2Client.generateAuthUrl({
     access_type: "offline",
     scope: scopes,
+    approval_prompt: "force",
   });
   res.redirect(url);
 });
